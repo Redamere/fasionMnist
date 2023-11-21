@@ -54,22 +54,29 @@ model = keras.Sequential([
 
 #-------------Compiling the model------------#
 
-model.compile(optimizer='adam', # algortithm that performs gradient descent
-              loss = 'sparse_categorical_crossentropy', # loss function
-              metrics=['accuracy']) #Pick different values for hyperparameter tuning
+# model.compile(optimizer='adam', # algortithm that performs gradient descent
+#               loss = 'sparse_categorical_crossentropy', # loss function
+#               metrics=['accuracy']) #Pick different values for hyperparameter tuning
 
 #-------------Training the model------------#
-model.fit(train_images, train_labels, epochs=10) 
+# model.fit(train_images, train_labels, epochs=10) 
 
 #-------------Evaluating the model------------#
 
 #use built-in method from keras
-test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=1)
-print('Test Accuracy: ', test_acc) #Test accuracy for first test was 87.783. Lower than training numbers because of  overfitting. Model is more accurate on data that has been repeatedly fed.
-#feeding new data lowers accuracy. Want highest accuracy possible on new data. Be aware of overfeeding in training! Less epochs might be better
+# test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=1)
+# print('Test Accuracy: ', test_acc) #Test accuracy for first test was 87.783. Lower than training numbers because of  overfitting. Model is more accurate on data that has been repeatedly fed.
+#feeding new data lowers accuracy. Want highest accuracy possible on new data. Be aware of overfeeding in training! Less epochs might be better in some cases
 
 #-------------Make Predictions------------#
-predictions = model.predict(test_images)
+# predictions = model.predict(test_images)
+
+#-------------Saving the model------------#
+# model.save("fmnist_model.h5")
+
+new_model = keras.models.load_model("fmnist_model.h5")
+new_model.evaluate(test_images, test_labels, verbose=2)
+
 #print(class_names[np.argmax(predictions[5])]) # np.argmax returns the highest value in array of predictions
 
 # plt.figure() #make a figure
